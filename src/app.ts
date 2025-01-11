@@ -1,10 +1,10 @@
-import express from 'express'
-import cors from 'cors'
-import supabase from './config/connectSupabase'
-import database_connect from './config/connectSupabase'
-
-const app=express()
-database_connect()
-app.use(cors())
-export default app
-
+import { AppDataSource } from "./config/database";
+import app from ".";
+AppDataSource.initialize()
+  .then(() => {
+    console.log("Database connection established");
+    app.listen(3000, () => {
+      console.log("Server running on port 3000");
+    });
+  })
+  .catch((error: any) => console.log("Database connection failed:", error));
