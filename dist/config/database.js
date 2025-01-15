@@ -7,6 +7,7 @@ exports.AppDataSource = void 0;
 const typeorm_1 = require("typeorm");
 const Product_1 = require("../entities/Product");
 const dotenv_1 = __importDefault(require("dotenv"));
+const Tenant_1 = require("../entities/Tenant");
 dotenv_1.default.config();
 exports.AppDataSource = new typeorm_1.DataSource({
     type: "postgres",
@@ -19,7 +20,7 @@ exports.AppDataSource = new typeorm_1.DataSource({
     },
     synchronize: false,
     logging: true,
-    entities: [Product_1.Product],
+    entities: [Product_1.Product, Tenant_1.Tenant],
     migrations: ["src/migrations/*.ts"],
     subscribers: []
 });

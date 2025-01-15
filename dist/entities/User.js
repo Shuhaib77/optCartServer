@@ -11,34 +11,17 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.User = void 0;
 const typeorm_1 = require("typeorm");
-require("reflect-metadata");
-const Tenant_1 = require("./Tenant");
 let User = class User {
 };
 exports.User = User;
 __decorate([
     (0, typeorm_1.PrimaryGeneratedColumn)(),
-    __metadata("design:type", Number)
+    __metadata("design:type", String)
 ], User.prototype, "id", void 0);
 __decorate([
-    (0, typeorm_1.ManyToOne)(() => Tenant_1.Tenant, (tenant) => tenant.users, { onDelete: "CASCADE" }) // Define the relationship with Tenant.
-    ,
-    (0, typeorm_1.JoinColumn)({ name: "tenant_id" }) // Specifies the foreign key column.
-    ,
-    __metadata("design:type", Tenant_1.Tenant)
-], User.prototype, "tenant", void 0);
-__decorate([
-    (0, typeorm_1.Column)(),
+    (0, typeorm_1.Column)({ type: "varchar" }),
     __metadata("design:type", String)
-], User.prototype, "name", void 0);
-__decorate([
-    (0, typeorm_1.Column)(),
-    __metadata("design:type", String)
-], User.prototype, "email", void 0);
-__decorate([
-    (0, typeorm_1.Column)(),
-    __metadata("design:type", String)
-], User.prototype, "password", void 0);
+], User.prototype, "tenant_id", void 0);
 exports.User = User = __decorate([
     (0, typeorm_1.Entity)()
 ], User);
