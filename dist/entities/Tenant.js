@@ -9,39 +9,36 @@ var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.Product = void 0;
+exports.Tenant = void 0;
 const typeorm_1 = require("typeorm");
-let Product = class Product {
+let Tenant = class Tenant {
 };
-exports.Product = Product;
+exports.Tenant = Tenant;
 __decorate([
-    (0, typeorm_1.PrimaryGeneratedColumn)("uuid"),
+    (0, typeorm_1.PrimaryGeneratedColumn)(),
     __metadata("design:type", String)
-], Product.prototype, "id", void 0);
+], Tenant.prototype, "tenant_id", void 0);
 __decorate([
-    (0, typeorm_1.Column)(),
+    (0, typeorm_1.Column)({ type: "varchar", length: 255, nullable: false }),
     __metadata("design:type", String)
-], Product.prototype, "name", void 0);
+], Tenant.prototype, "name", void 0);
 __decorate([
-    (0, typeorm_1.Column)({ type: "decimal", precision: 10, scale: 2, default: 0 }),
-    __metadata("design:type", Number)
-], Product.prototype, "price", void 0);
-__decorate([
-    (0, typeorm_1.Column)({ nullable: true }),
-    __metadata("design:type", String)
-], Product.prototype, "description", void 0);
-__decorate([
-    (0, typeorm_1.Column)({ default: true }),
-    __metadata("design:type", Boolean)
-], Product.prototype, "is_active", void 0);
-__decorate([
-    (0, typeorm_1.CreateDateColumn)(),
+    (0, typeorm_1.Column)({ type: "varchar", length: 255, unique: true }),
+    (0, typeorm_1.CreateDateColumn)({ type: Date }),
     __metadata("design:type", Date)
-], Product.prototype, "created_at", void 0);
+], Tenant.prototype, "created_at", void 0);
 __decorate([
     (0, typeorm_1.UpdateDateColumn)(),
     __metadata("design:type", Date)
-], Product.prototype, "updated_at", void 0);
-exports.Product = Product = __decorate([
+], Tenant.prototype, "updated_at", void 0);
+__decorate([
+    (0, typeorm_1.Column)({ type: "varchar", length: 200 }),
+    __metadata("design:type", String)
+], Tenant.prototype, "is_delete", void 0);
+__decorate([
+    (0, typeorm_1.Column)({ type: "varchar", length: 200 }),
+    __metadata("design:type", String)
+], Tenant.prototype, "created_by", void 0);
+exports.Tenant = Tenant = __decorate([
     (0, typeorm_1.Entity)()
-], Product);
+], Tenant);
