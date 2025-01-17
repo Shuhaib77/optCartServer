@@ -1,6 +1,5 @@
 "use strict";
 // import { Entity, PrimaryGeneratedColumn,Column } from "typeorm";
-Object.defineProperty(exports, "__esModule", { value: true });
 // @Entity('Tenants')
 // export class Tenant{
 //     @PrimaryGeneratedColumn()

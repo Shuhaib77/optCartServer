@@ -1,7 +1,6 @@
 "use strict";
 // import { createClient } from "@supabase/supabase-js";
 // import dotenv from "dotenv";
-Object.defineProperty(exports, "__esModule", { value: true });
 // dotenv.config();
 // const database_connect = async () => {
 //   const supabase = createClient(
