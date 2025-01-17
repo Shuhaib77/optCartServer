@@ -1,25 +1,45 @@
-import { Entity, PrimaryGeneratedColumn, Column, CreateDateColumn, UpdateDateColumn } from "typeorm"
-
-@Entity()
-export class Leave {
+import {
+    Entity,
+    PrimaryGeneratedColumn,
+    Column,
+    ManyToOne,
+    JoinColumn,
+    CreateDateColumn,
+    UpdateDateColumn,
+  } from "typeorm";
+import { Branches } from "./Branches";
+import { User } from "./user_entity";
+  
+  @Entity()
+  export class Leave {
     @PrimaryGeneratedColumn("uuid")
-    id!: string
-
+    id!: string;
+  
     @Column()
-    name!: string
-
-    @Column({ type: "decimal", precision: 10, scale: 2, default: 0 })
-    price!: number
-
+    name!: string;
+  
     @Column({ nullable: true })
-    description!: string
-
+    reason!: string;
+    
+    @Column()
+    status!:string
+  
     @Column({ default: true })
-    is_active!: boolean
-
+    is_active!: boolean;
+  
     @CreateDateColumn()
-    created_at!: Date
-
+    created_at!: Date;
+  
     @UpdateDateColumn()
-    updated_at!: Date
-}
+    updated_at!: Date;
+  
+    // Establishing the relationship with the Tenant table
+    @ManyToOne(() => Branches, (branches) => branches.leaves, { onDelete: "CASCADE" })
+    @JoinColumn({ name: "branch_id" }) // Specifies the foreign key column in the Leave table
+    branches!: Branches
+
+    @ManyToOne(()=> User,(branches)=>branches.leaves,{onDelete:'CASCADE'})
+    @JoinColumn({name:'user_id'})
+    user!:User
+  }
+  

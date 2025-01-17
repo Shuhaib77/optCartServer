@@ -7,6 +7,8 @@ import {
   UpdateDateColumn,
 } from "typeorm";
 import { User } from "./user_entity";
+import { Branches } from "./Branches";
+import { Policies } from './Policies';
 
 
 @Entity()
@@ -18,6 +20,7 @@ export class Tenant {
   name!: string;
 
   @Column({ type: "varchar", length: 255, unique: true }) 
+  password!:string;
 
   @CreateDateColumn({ type: "timestamp" })
   created_at!: Date;
@@ -34,4 +37,12 @@ export class Tenant {
 
   @OneToMany(() => User, (user) => user.tenant) // Establish the relationship with the User table.
   users!: User[];
+
+  @OneToMany(()=>Branches,(branches)=>branches.tenant)
+  branches!: Branches[];
+
+  @OneToMany(()=>Policies,(policies)=>policies.tenant)
+  Policies!:Policies[];
+
+
 }

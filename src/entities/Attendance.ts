@@ -2,10 +2,9 @@ import { Column, Entity, PrimaryGeneratedColumn } from "typeorm";
 
 
 @Entity()
-export class User{
+export class Attendance {
     @PrimaryGeneratedColumn()
     id!:string
-    @Column({type:"varchar" })
-    tenant_id !:string
 
+    
 }

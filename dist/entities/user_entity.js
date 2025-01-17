@@ -13,11 +13,12 @@ exports.User = void 0;
 const typeorm_1 = require("typeorm");
 require("reflect-metadata");
 const Tenant_1 = require("./Tenant");
+const Leave_1 = require("./Leave");
 let User = class User {
 };
 exports.User = User;
 __decorate([
-    (0, typeorm_1.PrimaryGeneratedColumn)(),
+    (0, typeorm_1.PrimaryGeneratedColumn)('uuid'),
     __metadata("design:type", Number)
 ], User.prototype, "id", void 0);
 __decorate([
@@ -39,6 +40,26 @@ __decorate([
     (0, typeorm_1.Column)(),
     __metadata("design:type", String)
 ], User.prototype, "password", void 0);
+__decorate([
+    (0, typeorm_1.Column)({
+        type: 'enum',
+        enum: ["admin", "hr_manager", "staff_head", "staff"],
+        nullable: false
+    }),
+    __metadata("design:type", String)
+], User.prototype, "role", void 0);
+__decorate([
+    (0, typeorm_1.CreateDateColumn)({ type: "timestamp", default: () => "CURRENT_TIMESTAMP" }),
+    __metadata("design:type", Date)
+], User.prototype, "created_at", void 0);
+__decorate([
+    (0, typeorm_1.UpdateDateColumn)({ type: 'timestamp', default: () => "CURRENT_TIMESTAMP" }),
+    __metadata("design:type", Date)
+], User.prototype, "updated_at", void 0);
+__decorate([
+    (0, typeorm_1.OneToMany)(() => Leave_1.Leave, (leave) => leave.user),
+    __metadata("design:type", Array)
+], User.prototype, "leaves", void 0);
 exports.User = User = __decorate([
     (0, typeorm_1.Entity)()
 ], User);

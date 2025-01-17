@@ -9,49 +9,52 @@ var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.Product = void 0;
+exports.Leave = void 0;
 const typeorm_1 = require("typeorm");
 const Branches_1 = require("./Branches");
-let Product = class Product {
+const user_entity_1 = require("./user_entity");
+let Leave = class Leave {
 };
-exports.Product = Product;
+exports.Leave = Leave;
 __decorate([
     (0, typeorm_1.PrimaryGeneratedColumn)("uuid"),
     __metadata("design:type", String)
-], Product.prototype, "id", void 0);
+], Leave.prototype, "id", void 0);
 __decorate([
     (0, typeorm_1.Column)(),
     __metadata("design:type", String)
-], Product.prototype, "name", void 0);
-__decorate([
-    (0, typeorm_1.Column)({ type: "decimal", precision: 10, scale: 2, default: 0 }),
-    __metadata("design:type", Number)
-], Product.prototype, "price", void 0);
+], Leave.prototype, "name", void 0);
 __decorate([
     (0, typeorm_1.Column)({ nullable: true }),
     __metadata("design:type", String)
-], Product.prototype, "description", void 0);
+], Leave.prototype, "reason", void 0);
 __decorate([
-    (0, typeorm_1.Column)({ type: 'decimal' }),
-    __metadata("design:type", Number)
-], Product.prototype, "quantity", void 0);
+    (0, typeorm_1.Column)(),
+    __metadata("design:type", String)
+], Leave.prototype, "status", void 0);
 __decorate([
     (0, typeorm_1.Column)({ default: true }),
     __metadata("design:type", Boolean)
-], Product.prototype, "is_active", void 0);
+], Leave.prototype, "is_active", void 0);
 __decorate([
     (0, typeorm_1.CreateDateColumn)(),
     __metadata("design:type", Date)
-], Product.prototype, "created_at", void 0);
+], Leave.prototype, "created_at", void 0);
 __decorate([
     (0, typeorm_1.UpdateDateColumn)(),
     __metadata("design:type", Date)
-], Product.prototype, "updated_at", void 0);
+], Leave.prototype, "updated_at", void 0);
 __decorate([
-    (0, typeorm_1.ManyToOne)(() => Branches_1.Branches, (branches) => branches.products, { onDelete: "CASCADE" }),
-    (0, typeorm_1.JoinColumn)({ name: 'branch_id' }),
+    (0, typeorm_1.ManyToOne)(() => Branches_1.Branches, (branches) => branches.leaves, { onDelete: "CASCADE" }),
+    (0, typeorm_1.JoinColumn)({ name: "branch_id" }) // Specifies the foreign key column in the Leave table
+    ,
     __metadata("design:type", Branches_1.Branches)
-], Product.prototype, "branches", void 0);
-exports.Product = Product = __decorate([
+], Leave.prototype, "branches", void 0);
+__decorate([
+    (0, typeorm_1.ManyToOne)(() => user_entity_1.User, (branches) => branches.leaves, { onDelete: 'CASCADE' }),
+    (0, typeorm_1.JoinColumn)({ name: 'user_id' }),
+    __metadata("design:type", user_entity_1.User)
+], Leave.prototype, "user", void 0);
+exports.Leave = Leave = __decorate([
     (0, typeorm_1.Entity)()
-], Product);
+], Leave);

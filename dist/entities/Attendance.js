@@ -9,19 +9,15 @@ var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.User = void 0;
+exports.Attendance = void 0;
 const typeorm_1 = require("typeorm");
-let User = class User {
+let Attendance = class Attendance {
 };
-exports.User = User;
+exports.Attendance = Attendance;
 __decorate([
     (0, typeorm_1.PrimaryGeneratedColumn)(),
     __metadata("design:type", String)
-], User.prototype, "id", void 0);
-__decorate([
-    (0, typeorm_1.Column)({ type: "varchar" }),
-    __metadata("design:type", String)
-], User.prototype, "tenant_id", void 0);
-exports.User = User = __decorate([
+], Attendance.prototype, "id", void 0);
+exports.Attendance = Attendance = __decorate([
     (0, typeorm_1.Entity)()
-], User);
+], Attendance);

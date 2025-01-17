@@ -1,6 +1,7 @@
-import { Entity, PrimaryGeneratedColumn, Column, ManyToOne, JoinColumn } from "typeorm";
+import { Entity, PrimaryGeneratedColumn, Column, ManyToOne, JoinColumn, CreateDateColumn, UpdateDateColumn, OneToMany } from "typeorm";
 import 'reflect-metadata'
 import { Tenant } from "./Tenant";
+import { Leave } from "./Leave";
 
 
 
@@ -8,7 +9,7 @@ import { Tenant } from "./Tenant";
 
 @Entity()
 export class User {
-  @PrimaryGeneratedColumn()
+  @PrimaryGeneratedColumn('uuid')
   id!: number;
 
   @ManyToOne(() => Tenant, (tenant) => tenant.users, { onDelete: "CASCADE" })// Define the relationship with Tenant.
@@ -25,7 +26,21 @@ export class User {
   @Column()
   password!: string;
 
-  // @Column()
-  // role!:[Admin,]
+  @Column({
+     type:'enum',
+     enum:[ "admin", "hr_manager", "staff_head", "staff"],
+     nullable:false
+    }) 
+  role!: "admin"| "hr_manager"| "staff_head"| "staff";
+
+    @CreateDateColumn({type:"timestamp", default:()=>"CURRENT_TIMESTAMP"})
+    created_at!: Date;
+
+    @UpdateDateColumn({type:'timestamp' , default:()=>"CURRENT_TIMESTAMP"})
+    updated_at!: Date;
+
+    @OneToMany(()=>Leave,(leave)=>leave.user)
+    leaves!:Leave[];
+
 
 }
