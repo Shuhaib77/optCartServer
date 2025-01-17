@@ -9,17 +9,22 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
     });
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.create_tenant = void 0;
-const tenet_service_1 = require("../services/super_admin/tenet_service");
-const create_tenant = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
-    const { name, password } = req.body;
-    if (!name || !password) {
-        return res.status(400).json({ message: "all field are nessessory" });
+exports.tenent_create = void 0;
+const Tenant_1 = require("../../entities/Tenant");
+const database_1 = require("../../config/database");
+const tenent_create = (name, password) => __awaiter(void 0, void 0, void 0, function* () {
+    console.log(name, password);
+    const tenantRepo = database_1.AppDataSource.getRepository(Tenant_1.Tenant);
+    const data = yield tenantRepo.findOneBy({
+        domain: name,
+    });
+    if (data) {
+        throw new Error("tenent alredy exist");
     }
-    const data = yield (0, tenet_service_1.tenent_create)(name, password);
-    if (!data) {
-        return res.status(404).json({ message: "login failed" });
-    }
-    return res.status(200).json({ message: "login success full", data: data });
+    const new_tenant = tenantRepo.create({
+        name: name,
+        password: password,
+    });
+    return new_tenant;
 });
-exports.create_tenant = create_tenant;
+exports.tenent_create = tenent_create;
