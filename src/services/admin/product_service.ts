@@ -15,6 +15,7 @@ export const productService=async(
     }
 
     const newProduct=productRepo.create({
+        branches:branch,
         name,
         price,
         description,

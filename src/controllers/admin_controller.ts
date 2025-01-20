@@ -88,7 +88,7 @@ export const productGetControl=async(req:Request,res:Response)=>{
   if(!product){
    return res.status(400).json({message:'product not found'})
   }
-  return res.status(200).json({message:"branched successfully",data:product})
+  return res.status(200).json({message:"fetched product successfully",data:product})
 }
 
 
