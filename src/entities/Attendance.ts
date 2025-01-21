@@ -6,5 +6,5 @@ export class Attendance {
     @PrimaryGeneratedColumn()
     id!:string
 
-    
+
 }

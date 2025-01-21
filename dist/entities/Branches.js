@@ -14,6 +14,9 @@ const typeorm_1 = require("typeorm");
 const Tenant_1 = require("./Tenant");
 const Product_1 = require("./Product");
 const Leave_1 = require("./Leave");
+const user_entity_1 = require("./user_entity");
+const Sales_1 = require("./Sales");
+const jobOpenings_1 = require("./jobOpenings");
 let Branches = class Branches {
 };
 exports.Branches = Branches;
@@ -43,6 +46,11 @@ __decorate([
     __metadata("design:type", Tenant_1.Tenant)
 ], Branches.prototype, "tenant", void 0);
 __decorate([
+    (0, typeorm_1.OneToMany)(() => user_entity_1.User, (user) => user.branch) // Establish the relationship with the User table.
+    ,
+    __metadata("design:type", Array)
+], Branches.prototype, "users", void 0);
+__decorate([
     (0, typeorm_1.OneToMany)(() => Product_1.Product, (product) => product.branches),
     __metadata("design:type", Array)
 ], Branches.prototype, "products", void 0);
@@ -50,6 +58,14 @@ __decorate([
     (0, typeorm_1.OneToMany)(() => Leave_1.Leave, (leave) => leave.branches),
     __metadata("design:type", Array)
 ], Branches.prototype, "leaves", void 0);
+__decorate([
+    (0, typeorm_1.OneToMany)(() => Sales_1.SalesReports, (sales) => sales.branches),
+    __metadata("design:type", Array)
+], Branches.prototype, "SalesReports", void 0);
+__decorate([
+    (0, typeorm_1.OneToMany)(() => jobOpenings_1.jobOpenings, (jobOpenings) => jobOpenings.branch),
+    __metadata("design:type", Array)
+], Branches.prototype, "job_Openings", void 0);
 exports.Branches = Branches = __decorate([
     (0, typeorm_1.Entity)()
 ], Branches);

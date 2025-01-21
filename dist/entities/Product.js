@@ -12,6 +12,7 @@ Object.defineProperty(exports, "__esModule", { value: true });
 exports.Product = void 0;
 const typeorm_1 = require("typeorm");
 const Branches_1 = require("./Branches");
+const Sales_1 = require("./Sales");
 let Product = class Product {
 };
 exports.Product = Product;
@@ -52,6 +53,10 @@ __decorate([
     (0, typeorm_1.JoinColumn)({ name: 'branch_id' }),
     __metadata("design:type", Branches_1.Branches)
 ], Product.prototype, "branches", void 0);
+__decorate([
+    (0, typeorm_1.OneToMany)(() => Sales_1.SalesReports, (sales) => sales.products),
+    __metadata("design:type", Array)
+], Product.prototype, "SalesReports", void 0);
 exports.Product = Product = __decorate([
     (0, typeorm_1.Entity)()
 ], Product);

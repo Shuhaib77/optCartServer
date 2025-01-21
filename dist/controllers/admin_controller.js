@@ -9,12 +9,12 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
     });
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.productDeleteControl = exports.productGetControl = exports.productUpdate = exports.productCreate = exports.branchUpdated = exports.branchGetControl = exports.createBranch = void 0;
+exports.deleteUser = exports.userGet = exports.updateUser = exports.userAdd = exports.productDeleteControl = exports.productGetControl = exports.productUpdate = exports.productCreate = exports.branchUpdated = exports.branchGetControl = exports.createBranch = void 0;
 const branch_service_1 = require("../services/admin/branch_service");
 const product_service_1 = require("../services/admin/product_service");
+const employeeService_1 = require("../services/admin/employeeService");
 const createBranch = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     const { tenant_id, branch_name, location } = req.body;
-    console.log(tenant_id, branch_name, location);
     if (!tenant_id || !branch_name || !location) {
         return res.status(400).json({ message: 'missing required field' });
     }
@@ -76,7 +76,7 @@ const productGetControl = (req, res) => __awaiter(void 0, void 0, void 0, functi
     if (!product) {
         return res.status(400).json({ message: 'product not found' });
     }
-    return res.status(200).json({ message: "branched successfully", data: product });
+    return res.status(200).json({ message: "fetched product successfully", data: product });
 });
 exports.productGetControl = productGetControl;
 const productDeleteControl = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
@@ -91,3 +91,44 @@ const productDeleteControl = (req, res) => __awaiter(void 0, void 0, void 0, fun
     res.status(200).json(result);
 });
 exports.productDeleteControl = productDeleteControl;
+//Employee ______________
+const userAdd = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
+    const { branch_id, name, email, password, role } = req.body;
+    if (!branch_id || !name || !email || !password || !role) {
+        return res.status(400).json({ message: "required field is missing" });
+    }
+    const result = yield (0, employeeService_1.employeeService)(branch_id, name, email, password, role);
+    if (!result) {
+        return res.status(400).json({ message: 'failed to add employee' });
+    }
+    return res.status(201).json({ result, message: 'product added successfully' });
+});
+exports.userAdd = userAdd;
+const updateUser = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
+    const { user_id } = req.params;
+    const { name, email, password, role } = req.body;
+    const result = yield (0, employeeService_1.employeeUpdateService)(user_id, name, email, password, role);
+    if (!result) {
+        return res.status(400).json({ message: 'filed to update user' });
+    }
+    res.status(201).json({ data: result, message: 'user updated successfully' });
+});
+exports.updateUser = updateUser;
+const userGet = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
+    const { branchId } = req.params;
+    const result = yield (0, employeeService_1.getUserService)(branchId);
+    if (!result) {
+        return res.status(400).json({ message: 'failed to fetch users' });
+    }
+    res.status(200).json(result);
+});
+exports.userGet = userGet;
+const deleteUser = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
+    const { userId } = req.params;
+    const result = yield (0, employeeService_1.deleteUserService)(userId);
+    if (!result) {
+        return res.status(400).json({ message: 'failed to delete user' });
+    }
+    res.status(200).json(result);
+});
+exports.deleteUser = deleteUser;

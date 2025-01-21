@@ -1,10 +1,10 @@
 import { Request, Response } from "express";
 import { branch_service, getBranch, updateBranch } from "../services/admin/branch_service";
 import { deleteProductService, getProducts, productService, productUpdateService } from "../services/admin/product_service";
+import { deleteUserService, employeeService, employeeUpdateService, getUserService } from "../services/admin/employeeService";
 
 export const createBranch = async (req:Request,res:Response) =>{
     const {tenant_id, branch_name,location}=req.body
-    console.log(tenant_id,branch_name,location);
     
 
     if(!tenant_id|| !branch_name|| !location){
@@ -106,6 +106,68 @@ export const productDeleteControl=async(req:Request,res:Response)=>{
   }
   res.status(200).json(result)
 }
+
+
+//Employee ______________
+
+
+
+export const userAdd=async(req:Request,res:Response)=>{
+  const {branch_id, name,email, password, role}=req.body
+
+  if(!branch_id || !name || !email || !password || !role){
+    return res.status(400).json({message:"required field is missing"})
+  }
+
+  const result= await employeeService(branch_id, name,email, password, role);
+  if(!result){
+    return res.status(400).json({message:'failed to add employee'})
+  }
+
+  return res.status(201).json({result,message:'product added successfully'})
+  
+}
+
+
+export const  updateUser=async(req:Request,res:Response)=>{
+  const {user_id}=req.params;
+  const {name,email, password, role}=req.body;
+
+ const result= await employeeUpdateService(user_id, name,email, password, role);
+ if(!result){
+  return res.status(400).json({message:'filed to update user'})
+ }
+ 
+ res.status(201).json({data:result,message:'user updated successfully'})
+
+}
+
+
+export const userGet=async(req:Request,res:Response)=>{
+  const {branchId}=req.params;
+
+  const result=await getUserService(branchId);
+  if(!result){
+    return res.status(400).json({message:'failed to fetch users'})
+  }
+
+  res.status(200).json(result)
+}
+
+
+export const deleteUser=async(req:Request,res:Response)=>{
+  const {userId}=req.params;
+
+  const result=await deleteUserService(userId)
+  if(!result){
+    return res.status(400).json({message:'failed to delete user'})
+  }
+
+  res.status(200).json(result)
+}
+
+
+
 
 
 
