@@ -2,6 +2,9 @@ import { Column, CreateDateColumn, Entity, JoinColumn, ManyToMany, ManyToOne, On
 import { Tenant } from "./Tenant";
 import { Product } from "./Product";
 import { Leave } from "./Leave";
+import { User } from "./user_entity";
+import { SalesReports } from './Sales';
+import { jobOpenings } from "./jobOpenings";
 
 @Entity()
 export class Branches {
@@ -24,11 +27,20 @@ export class Branches {
     @JoinColumn({name:'tenant_id'})
     tenant!:Tenant
 
+    @OneToMany(() => User, (user) => user.branch) // Establish the relationship with the User table.
+    users!: User[];
+
     @OneToMany(()=>Product,(product)=>product.branches)
     products!:Product[];
 
     @OneToMany(()=>Leave,(leave)=>leave.branches)
     leaves!:Leave[];
+
+    @OneToMany(()=>SalesReports,(sales)=>sales.branches)
+    SalesReports!:SalesReports[];
+
+    @OneToMany(()=>jobOpenings,(jobOpenings)=>jobOpenings.branch)
+    job_Openings!:jobOpenings[];
 
 
     

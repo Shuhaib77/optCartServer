@@ -21,6 +21,7 @@ const productService = (branch_id, name, price, description, quantity) => __awai
         throw new Error('branch not found');
     }
     const newProduct = productRepo.create({
+        branches: branch,
         name,
         price,
         description,
