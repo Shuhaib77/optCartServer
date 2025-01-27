@@ -11,4 +11,5 @@ export const create_tenant = async (req: Request, res: Response) => {
     return res.status(404).json({ message: "login failed" });
   }
   return res.status(200).json({ message: "login success full", data: data });
+  
 };
