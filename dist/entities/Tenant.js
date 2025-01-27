@@ -11,7 +11,6 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.Tenant = void 0;
 const typeorm_1 = require("typeorm");
-const user_entity_1 = require("./user_entity");
 const Branches_1 = require("./Branches");
 const Policies_1 = require("./Policies");
 let Tenant = class Tenant {
@@ -45,11 +44,6 @@ __decorate([
     (0, typeorm_1.Column)({ type: "varchar", length: 200 }),
     __metadata("design:type", String)
 ], Tenant.prototype, "created_by", void 0);
-__decorate([
-    (0, typeorm_1.OneToMany)(() => user_entity_1.User, (user) => user.tenant) // Establish the relationship with the User table.
-    ,
-    __metadata("design:type", Array)
-], Tenant.prototype, "users", void 0);
 __decorate([
     (0, typeorm_1.OneToMany)(() => Branches_1.Branches, (branches) => branches.tenant),
     __metadata("design:type", Array)

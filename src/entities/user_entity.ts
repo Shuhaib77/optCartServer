@@ -2,6 +2,7 @@ import { Entity, PrimaryGeneratedColumn, Column, ManyToOne, JoinColumn, CreateDa
 import 'reflect-metadata'
 import { Tenant } from "./Tenant";
 import { Leave } from "./Leave";
+import { Branches } from "./Branches";
 
 
 
@@ -12,10 +13,9 @@ export class User {
   @PrimaryGeneratedColumn('uuid')
   id!: number;
 
-  @ManyToOne(() => Tenant, (tenant) => tenant.users, { onDelete: "CASCADE" })// Define the relationship with Tenant.
-
-  @JoinColumn({ name: "tenant_id" }) // Specifies the foreign key column.
-  tenant!: Tenant;
+  @ManyToOne(() => Branches, (branch) => branch.users, { onDelete: "CASCADE" })// Define the relationship with Tenant.
+  @JoinColumn({ name: "branch_id" }) // Specifies the foreign key column.
+  branch!: Branches;
 
   @Column()
   name!: string;

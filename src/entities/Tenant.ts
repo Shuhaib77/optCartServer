@@ -6,7 +6,6 @@ import {
   PrimaryGeneratedColumn,
   UpdateDateColumn,
 } from "typeorm";
-import { User } from "./user_entity";
 import { Branches } from "./Branches";
 import { Policies } from './Policies';
 
@@ -35,8 +34,7 @@ export class Tenant {
   @Column({ type: "varchar", length: 200 })
   created_by!: string;
 
-  @OneToMany(() => User, (user) => user.tenant) // Establish the relationship with the User table.
-  users!: User[];
+  
 
   @OneToMany(()=>Branches,(branches)=>branches.tenant)
   branches!: Branches[];
