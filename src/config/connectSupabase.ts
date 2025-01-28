@@ -8,7 +8,7 @@ const database_connect = async () => {
     process.env.SUPABASE_URL as string,
     process.env.SUPABASE_KEY as string
   );
-  console.log();
+  console.log(supabase);
 
   if (!supabase) {
     console.log("connection failed");
