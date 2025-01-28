@@ -1,10 +1,16 @@
-import express from 'express'
-import cors from 'cors'
-import supabase from './config/connectSupabase'
-import database_connect from './config/connectSupabase'
+import express from "express"
+import cors from "cors"
+import super_admin_route from "./routes/super_admin_route"
+import admin_route from './routes/admin_route'
+import hr_route from './routes/hr_routes'
 
-const app=express()
-database_connect()
+const app = express()
 app.use(cors())
+app.use(express.json())
+app.use("/api/super_admin",super_admin_route)
+app.use("/api/admin",admin_route)
+app.use('/api/hr',hr_route)
+
 export default app
+
 

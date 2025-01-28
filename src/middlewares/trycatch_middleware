@@ -1,0 +1,15 @@
+import { NextFunction, Request, Response } from "express";
+
+const trycatch = async (routehandler: Function) => {
+  return async (req: Request, res: Response, next: NextFunction) => {
+    try {
+      await routehandler(req, res, next);
+    } catch (error: any) {
+      res.status(500).json({
+        message: "error",
+        status: "failed",
+        error_message: error.message,
+      });
+    }
+  };
+};

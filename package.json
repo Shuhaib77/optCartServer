@@ -4,9 +4,13 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "dev": "nodemon src/index.ts",
+    "dev": "nodemon --exec ts-node src/index.ts",
     "start": "node dist/index.js",
-    "build": "tsc"
+    "build": "tsc",
+    "typeorm": "typeorm-ts-node-commonjs",
+    "migration:run": "npm run typeorm migration:run -- -d src/config/database.ts",
+    "migration:revert": "npm run typeorm migration:revert -- -d src/config/database.ts",
+    "migration:show": "npm run typeorm migration:show -- -d src/config/database.ts"
   },
   "keywords": [],
   "author": "",
@@ -14,12 +18,23 @@
   "dependencies": {
     "@supabase/supabase-js": "^2.47.10",
     "@types/cors": "^2.8.17",
-    "@types/express": "^5.0.0",
+    "@types/multer": "^1.4.12",
     "@types/nodemon": "^1.19.6",
+    "@types/pg": "^8.11.10",
+    "cloudinary": "^2.5.1",
     "cors": "^2.8.5",
     "dotenv": "^16.4.7",
     "express": "^4.21.2",
+    "multer": "^1.4.5-lts.1",
+    "pg": "^8.13.1",
+    "reflect-metadata": "^0.2.2",
+    "typeorm": "^0.3.20"
+  },
+  "devDependencies": {
+    "@types/express": "^4.17.17",
+    "@types/node": "^22.10.7",
     "nodemon": "^3.1.9",
-    "ts-node": "^10.9.2"
+    "ts-node": "^10.9.2",
+    "typescript": "^5.7.3"
   }
 }
