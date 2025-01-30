@@ -13,23 +13,31 @@ exports.deleteUserService = exports.getUserService = exports.employeeUpdateServi
 const database_1 = require("../../config/database");
 const Branches_1 = require("../../entities/Branches");
 const user_entity_1 = require("../../entities/user_entity");
-const employeeService = (branch_id, name, email, password, role) => __awaiter(void 0, void 0, void 0, function* () {
+const employeeService = (branch_id, name, email, password, role, category) => __awaiter(void 0, void 0, void 0, function* () {
     const branchRepo = database_1.AppDataSource.getRepository(Branches_1.Branches);
     const userRepo = database_1.AppDataSource.getRepository(user_entity_1.User);
     const branch = yield branchRepo.findOneBy({ id: branch_id });
     if (!branch) {
-        throw new Error("branch not found");
+        throw new Error("Branch not found");
     }
-    const data = yield userRepo.findOneBy({ email: email });
-    if (data) {
-        throw new Error('user already exist');
+    const existingUser = yield userRepo.findOneBy({ email: email });
+    if (existingUser) {
+        throw new Error("User already exists");
+    }
+    // Validate category based on role
+    if (role === "staff_head" && !category) {
+        throw new Error("Category is required for staff_head role");
+    }
+    if (role !== "staff_head" && category) {
+        throw new Error("Only staff_head role can have a category");
     }
     const newUser = userRepo.create({
         branch: branch,
         name,
         email,
         password,
-        role: role
+        role,
+        category: role === "staff_head" ? category : undefined // Ensure other roles do not store category
     });
     yield userRepo.save(newUser);
     return newUser;
@@ -73,6 +81,6 @@ const deleteUserService = (userId) => __awaiter(void 0, void 0, void 0, function
         throw new Error("user not found");
     }
     yield userRepo.delete(userId);
-    return { message: "deleted product successfully" };
+    return { message: "deleted user successfully" };
 });
 exports.deleteUserService = deleteUserService;

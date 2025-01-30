@@ -15,8 +15,9 @@ const Tenant_1 = require("./Tenant");
 const Product_1 = require("./Product");
 const Leave_1 = require("./Leave");
 const user_entity_1 = require("./user_entity");
-const Sales_1 = require("./Sales");
 const jobOpenings_1 = require("./jobOpenings");
+const Sales_1 = require("./Sales");
+
 let Branches = class Branches {
 };
 exports.Branches = Branches;
@@ -25,15 +26,15 @@ __decorate([
     __metadata("design:type", String)
 ], Branches.prototype, "id", void 0);
 __decorate([
-    (0, typeorm_1.Column)({ type: 'varchar', nullable: false }),
+    (0, typeorm_1.Column)({ type: "varchar", nullable: false }),
     __metadata("design:type", String)
 ], Branches.prototype, "branch_name", void 0);
 __decorate([
-    (0, typeorm_1.Column)({ type: 'varchar' }),
+    (0, typeorm_1.Column)({ type: "varchar" }),
     __metadata("design:type", String)
 ], Branches.prototype, "location", void 0);
 __decorate([
-    (0, typeorm_1.CreateDateColumn)({ type: 'timestamp', default: () => "CURRENT_TIMESTAMP" }),
+    (0, typeorm_1.CreateDateColumn)({ type: "timestamp", default: () => "CURRENT_TIMESTAMP" }),
     __metadata("design:type", Date)
 ], Branches.prototype, "created_at", void 0);
 __decorate([
@@ -41,8 +42,8 @@ __decorate([
     __metadata("design:type", Date)
 ], Branches.prototype, "updated_at", void 0);
 __decorate([
-    (0, typeorm_1.ManyToOne)(() => Tenant_1.Tenant, (tenent) => tenent.branches, { onDelete: 'CASCADE' }),
-    (0, typeorm_1.JoinColumn)({ name: 'tenant_id' }),
+    (0, typeorm_1.ManyToOne)(() => Tenant_1.Tenant, (tenent) => tenent.branches, { onDelete: "CASCADE" }),
+    (0, typeorm_1.JoinColumn)({ name: "tenant_id" }),
     __metadata("design:type", Tenant_1.Tenant)
 ], Branches.prototype, "tenant", void 0);
 __decorate([
@@ -59,13 +60,21 @@ __decorate([
     __metadata("design:type", Array)
 ], Branches.prototype, "leaves", void 0);
 __decorate([
-    (0, typeorm_1.OneToMany)(() => Sales_1.SalesReports, (sales) => sales.branches),
+    (0, typeorm_1.OneToMany)(() => Sales_1.Sales, (sales) => sales.branches),
     __metadata("design:type", Array)
-], Branches.prototype, "SalesReports", void 0);
+], Branches.prototype, "Sales", void 0);
 __decorate([
     (0, typeorm_1.OneToMany)(() => jobOpenings_1.jobOpenings, (jobOpenings) => jobOpenings.branch),
     __metadata("design:type", Array)
 ], Branches.prototype, "job_Openings", void 0);
+__decorate([
+    (0, typeorm_1.ManyToOne)(() => Inventory_1.inventory, (inventory) => inventory.branches),
+    __metadata("design:type", Inventory_1.inventory)
+], Branches.prototype, "inventory", void 0);
+__decorate([
+    (0, typeorm_1.OneToMany)(() => InventoryAudits_1.inventoryAudit, (inventoryAudit) => inventoryAudit.branch),
+    __metadata("design:type", Array)
+], Branches.prototype, "inventory_audits", void 0);
 exports.Branches = Branches = __decorate([
     (0, typeorm_1.Entity)()
 ], Branches);

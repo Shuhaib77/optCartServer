@@ -16,7 +16,7 @@ const tenent_create = (name, password) => __awaiter(void 0, void 0, void 0, func
     console.log(name, password);
     const tenantRepo = database_1.AppDataSource.getRepository(Tenant_1.Tenant);
     const data = yield tenantRepo.findOneBy({
-        domain: name,
+        name: name,
     });
     if (data) {
         throw new Error("tenent alredy exist");
@@ -24,7 +24,9 @@ const tenent_create = (name, password) => __awaiter(void 0, void 0, void 0, func
     const new_tenant = tenantRepo.create({
         name: name,
         password: password,
+        created_by: name
     });
+    yield tenantRepo.save(new_tenant);
     return new_tenant;
 });
 exports.tenent_create = tenent_create;

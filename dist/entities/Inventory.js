@@ -9,56 +9,48 @@ var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.Product = void 0;
+exports.inventory = void 0;
 const typeorm_1 = require("typeorm");
 const Branches_1 = require("./Branches");
-const Sales_1 = require("./Sales");
-const InventoryAudits_1 = require("./InventoryAudits");
-let Product = class Product {
+let inventory = class inventory {
 };
-exports.Product = Product;
+exports.inventory = inventory;
 __decorate([
-    (0, typeorm_1.PrimaryGeneratedColumn)("uuid"),
+    (0, typeorm_1.PrimaryGeneratedColumn)('uuid'),
     __metadata("design:type", String)
-], Product.prototype, "id", void 0);
+], inventory.prototype, "id", void 0);
 __decorate([
-    (0, typeorm_1.Column)(),
+    (0, typeorm_1.Column)({ type: "varchar", nullable: false }),
     __metadata("design:type", String)
-], Product.prototype, "name", void 0);
+], inventory.prototype, "product_name", void 0);
 __decorate([
-    (0, typeorm_1.Column)({ type: "decimal", precision: 10, scale: 2, default: 0 }),
+    (0, typeorm_1.Column)({ type: "varchar" }),
+    __metadata("design:type", String)
+], inventory.prototype, "about_product", void 0);
+__decorate([
+    (0, typeorm_1.Column)({ type: "int" }),
     __metadata("design:type", Number)
-], Product.prototype, "price", void 0);
+], inventory.prototype, "stock_leval", void 0);
 __decorate([
-    (0, typeorm_1.Column)({ nullable: true }),
-    __metadata("design:type", String)
-], Product.prototype, "description", void 0);
-__decorate([
-    (0, typeorm_1.Column)({ type: 'decimal' }),
+    (0, typeorm_1.Column)({ type: "int" }),
     __metadata("design:type", Number)
-], Product.prototype, "quantity", void 0);
+], inventory.prototype, "price", void 0);
 __decorate([
     (0, typeorm_1.Column)({ default: true }),
     __metadata("design:type", Boolean)
-], Product.prototype, "is_active", void 0);
+], inventory.prototype, "is_active", void 0);
 __decorate([
-    (0, typeorm_1.CreateDateColumn)(),
+    (0, typeorm_1.CreateDateColumn)({ type: "timestamp" }),
     __metadata("design:type", Date)
-], Product.prototype, "created_at", void 0);
+], inventory.prototype, "created_at", void 0);
 __decorate([
-    (0, typeorm_1.UpdateDateColumn)(),
+    (0, typeorm_1.UpdateDateColumn)({ type: "timestamp" }),
     __metadata("design:type", Date)
-], Product.prototype, "updated_at", void 0);
+], inventory.prototype, "updated_at", void 0);
 __decorate([
-    (0, typeorm_1.ManyToOne)(() => Branches_1.Branches, (branches) => branches.products, { onDelete: "CASCADE" }),
-    (0, typeorm_1.JoinColumn)({ name: 'branch_id' }),
-    __metadata("design:type", Branches_1.Branches)
-], Product.prototype, "branches", void 0);
-__decorate([
-    (0, typeorm_1.OneToMany)(() => Sales_1.Sales, (sales) => sales.products),
+    (0, typeorm_1.OneToMany)(() => Branches_1.Branches, (Branches) => Branches.inventory),
     __metadata("design:type", Array)
-], Product.prototype, "Sales", void 0);
-
-exports.Product = Product = __decorate([
+], inventory.prototype, "branches", void 0);
+exports.inventory = inventory = __decorate([
     (0, typeorm_1.Entity)()
-], Product);
+], inventory);

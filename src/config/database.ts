@@ -6,8 +6,12 @@ import { User } from "../entities/user_entity"
 import { Leave } from "../entities/Leave"
 import { Branches } from "../entities/Branches"
 import { Policies } from "../entities/Policies"
-import { SalesReports } from "../entities/Sales"
+import { Sales, } from "../entities/Sales"
+
 import { jobOpenings } from '../entities/jobOpenings';
+import { inventory } from "../entities/Inventory"
+import { inventoryAudit } from "../entities/InventoryAudits"
+import { Policies } from "../entities/Policies"
 
 dotenv.config()
 
@@ -22,7 +26,8 @@ export const AppDataSource = new DataSource({
     },
     synchronize: false,
     logging: true,
-    entities: [Product,Tenant,User,Leave,Branches,Policies,SalesReports,jobOpenings],
+    entities: [Product,Tenant,User,Leave,Branches,Policies,Sales,jobOpenings],
+
     migrations: ["dist/migrations/*.js"],
     subscribers: []
 })

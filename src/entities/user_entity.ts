@@ -3,7 +3,8 @@ import 'reflect-metadata'
 import { Tenant } from "./Tenant";
 import { Leave } from "./Leave";
 import { Branches } from "./Branches";
-import { Attendance } from "./Attendance";
+import { Sales } from "./Sales";
+
 
 
 
@@ -12,7 +13,8 @@ import { Attendance } from "./Attendance";
 @Entity()
 export class User {
   @PrimaryGeneratedColumn('uuid')
-  id!: number|string
+  id!: string | number;
+
 
   @ManyToOne(() => Branches, (branch) => branch.users, { onDelete: "CASCADE" })// Define the relationship with Tenant.
   @JoinColumn({ name: "branch_id" }) // Specifies the foreign key column.
@@ -34,6 +36,13 @@ export class User {
     }) 
   role!: "admin"| "hr_manager"| "staff_head"| "staff";
 
+  @Column({ 
+    type:'enum',
+    enum:["sales", "inventory", "Finance", "customer_service"],
+    nullable:true
+   })
+  category?:"sales" | "inventory" | "Finance" | "customer_service" ;
+
     @CreateDateColumn({type:"timestamp", default:()=>"CURRENT_TIMESTAMP"})
     created_at!: Date;
 
@@ -43,8 +52,10 @@ export class User {
     @OneToMany(()=>Leave,(leave)=>leave.user)
     leaves!:Leave[];
 
-    @OneToMany(()=>Attendance,(attendance)=>attendance.user)
-    attendance!:Attendance
+
+    @OneToMany(() => Sales, (sales) => sales.staff) // Link Sales to User
+    sales!: Sales[];
+
 
 
 }
