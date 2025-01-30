@@ -41,7 +41,7 @@ __decorate([
     __metadata("design:type", Boolean)
 ], Tenant.prototype, "is_deleted", void 0);
 __decorate([
-    (0, typeorm_1.Column)({ type: "varchar", length: 200 }),
+    (0, typeorm_1.Column)({ type: "varchar", length: 200, }),
     __metadata("design:type", String)
 ], Tenant.prototype, "created_by", void 0);
 __decorate([

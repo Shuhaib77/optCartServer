@@ -26,7 +26,7 @@ exports.AppDataSource = new typeorm_1.DataSource({
     },
     synchronize: false,
     logging: true,
-    entities: [Product_1.Product, Tenant_1.Tenant, user_entity_1.User, Leave_1.Leave, Branches_1.Branches, Policies_1.Policies, Sales_1.SalesReports, jobOpenings_1.jobOpenings],
+    entities: [Product_1.Product, Tenant_1.Tenant, user_entity_1.User, Leave_1.Leave, Branches_1.Branches, Policies_1.Policies, Sales_1.Sales, jobOpenings_1.jobOpenings],
     migrations: ["dist/migrations/*.js"],
     subscribers: []
 });

@@ -1,9 +1,9 @@
 import { AppDataSource } from "../../config/database"
-import { SalesReports } from "../../entities/Sales"
+import { Sales } from "../../entities/Sales";
 
 
 export const salesGetService=async (branchId:string,startDate:Date,endDate:Date)=>{
-    const salesRepo=AppDataSource.getRepository(SalesReports)
+    const salesRepo=AppDataSource.getRepository(Sales)
 
     const query=salesRepo.createQueryBuilder('salesReports')
     .leftJoinAndSelect("salesReports.branch", "branch")

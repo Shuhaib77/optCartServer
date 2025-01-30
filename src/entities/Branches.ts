@@ -3,8 +3,8 @@ import { Tenant } from "./Tenant";
 import { Product } from "./Product";
 import { Leave } from "./Leave";
 import { User } from "./user_entity";
-import { SalesReports } from './Sales';
 import { jobOpenings } from "./jobOpenings";
+import { Sales } from "./Sales";
 
 @Entity()
 export class Branches {
@@ -36,8 +36,8 @@ export class Branches {
     @OneToMany(()=>Leave,(leave)=>leave.branches)
     leaves!:Leave[];
 
-    @OneToMany(()=>SalesReports,(sales)=>sales.branches)
-    SalesReports!:SalesReports[];
+    @OneToMany(()=>Sales,(sales)=>sales.branches)
+    Sales!:Sales[];
 
     @OneToMany(()=>jobOpenings,(jobOpenings)=>jobOpenings.branch)
     job_Openings!:jobOpenings[];

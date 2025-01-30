@@ -93,11 +93,11 @@ const productDeleteControl = (req, res) => __awaiter(void 0, void 0, void 0, fun
 exports.productDeleteControl = productDeleteControl;
 //Employee ______________
 const userAdd = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
-    const { branch_id, name, email, password, role } = req.body;
+    const { branch_id, name, email, password, role, category } = req.body;
     if (!branch_id || !name || !email || !password || !role) {
         return res.status(400).json({ message: "required field is missing" });
     }
-    const result = yield (0, employeeService_1.employeeService)(branch_id, name, email, password, role);
+    const result = yield (0, employeeService_1.employeeService)(branch_id, name, email, password, role, category);
     if (!result) {
         return res.status(400).json({ message: 'failed to add employee' });
     }
