@@ -3,6 +3,7 @@ import 'reflect-metadata'
 import { Tenant } from "./Tenant";
 import { Leave } from "./Leave";
 import { Branches } from "./Branches";
+import { Attendance } from "./Attendance";
 
 
 
@@ -11,7 +12,7 @@ import { Branches } from "./Branches";
 @Entity()
 export class User {
   @PrimaryGeneratedColumn('uuid')
-  id!: number;
+  id!: number|string
 
   @ManyToOne(() => Branches, (branch) => branch.users, { onDelete: "CASCADE" })// Define the relationship with Tenant.
   @JoinColumn({ name: "branch_id" }) // Specifies the foreign key column.
@@ -41,6 +42,9 @@ export class User {
 
     @OneToMany(()=>Leave,(leave)=>leave.user)
     leaves!:Leave[];
+
+    @OneToMany(()=>Attendance,(attendance)=>attendance.user)
+    attendance!:Attendance
 
 
 }
