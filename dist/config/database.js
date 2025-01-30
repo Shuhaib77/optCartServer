@@ -14,6 +14,8 @@ const Branches_1 = require("../entities/Branches");
 const Policies_1 = require("../entities/Policies");
 const Sales_1 = require("../entities/Sales");
 const jobOpenings_1 = require("../entities/jobOpenings");
+const Inventory_1 = require("../entities/Inventory");
+const InventoryAudits_1 = require("../entities/InventoryAudits");
 dotenv_1.default.config();
 exports.AppDataSource = new typeorm_1.DataSource({
     type: "postgres",

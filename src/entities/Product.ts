@@ -2,6 +2,7 @@ import { Entity, PrimaryGeneratedColumn, Column, CreateDateColumn, UpdateDateCol
 import { Branches } from "./Branches";
 import { Sales } from './Sales';
 
+
 @Entity()
 export class Product {
     @PrimaryGeneratedColumn("uuid")
@@ -34,4 +35,5 @@ export class Product {
 
     @OneToMany(()=>Sales,(sales)=>sales.products)
     Sales!:Sales[];
+
 }
