@@ -11,7 +11,7 @@ const hr_routes_1 = __importDefault(require("./routes/hr_routes"));
 const app = (0, express_1.default)();
 app.use((0, cors_1.default)());
 app.use(express_1.default.json());
-app.use("/api/super_admin", super_admin_route_1.default);
+app.use("/api/superadmin", super_admin_route_1.default);
 app.use("/api/admin", admin_route_1.default);
 app.use('/api/hr', hr_routes_1.default);
 exports.default = app;
