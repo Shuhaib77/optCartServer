@@ -73,6 +73,6 @@ const deleteUserService = (userId) => __awaiter(void 0, void 0, void 0, function
         throw new Error("user not found");
     }
     yield userRepo.delete(userId);
-    return { message: "deleted product successfully" };
+    return { message: "deleted user successfully" };
 });
 exports.deleteUserService = deleteUserService;
