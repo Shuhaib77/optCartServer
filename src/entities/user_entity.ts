@@ -9,10 +9,12 @@ import { Sales } from "./Sales";
 
 
 
+
 @Entity()
 export class User {
   @PrimaryGeneratedColumn('uuid')
   id!: string | number;
+
 
   @ManyToOne(() => Branches, (branch) => branch.users, { onDelete: "CASCADE" })// Define the relationship with Tenant.
   @JoinColumn({ name: "branch_id" }) // Specifies the foreign key column.
@@ -50,8 +52,10 @@ export class User {
     @OneToMany(()=>Leave,(leave)=>leave.user)
     leaves!:Leave[];
 
+
     @OneToMany(() => Sales, (sales) => sales.staff) // Link Sales to User
     sales!: Sales[];
+
 
 
 }
