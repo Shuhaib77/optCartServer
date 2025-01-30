@@ -88,7 +88,7 @@ export const deleteUserService=async (userId:string|number)=>{
 
     await userRepo.delete(userId)
 
-    return {message:"deleted product successfully"}
+    return {message:"deleted user successfully"}
 
 
 }

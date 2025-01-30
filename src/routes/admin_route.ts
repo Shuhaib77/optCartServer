@@ -8,13 +8,13 @@ router.put('/branches/:branchId', branchUpdated);
 
 //product 
 router.post('/products', productCreate); 
-router.put('/products/:productId', productUpdate);
+router.put('/products/:product_id', productUpdate);
 router.get('/products/branch/:branchId',productGetControl);
 router.delete('/products/:productId',productDeleteControl);
 
 //user 
 router.post('/users',userAdd);
-router.put('/users/:userId',updateUser);
+router.put('/users/:user_id',updateUser);
 router.get('/users/branch/:branchId',userGet);
 router.delete('/users/:userId',deleteUser);
 
