@@ -55,13 +55,10 @@ __decorate([
     __metadata("design:type", Branches_1.Branches)
 ], Product.prototype, "branches", void 0);
 __decorate([
-    (0, typeorm_1.OneToMany)(() => Sales_1.SalesReports, (sales) => sales.products),
+    (0, typeorm_1.OneToMany)(() => Sales_1.Sales, (sales) => sales.products),
     __metadata("design:type", Array)
-], Product.prototype, "SalesReports", void 0);
-__decorate([
-    (0, typeorm_1.OneToMany)(() => InventoryAudits_1.inventoryAudit, (audit) => audit.product),
-    __metadata("design:type", Array)
-], Product.prototype, "inventory_audits", void 0);
+], Product.prototype, "Sales", void 0);
+
 exports.Product = Product = __decorate([
     (0, typeorm_1.Entity)()
 ], Product);

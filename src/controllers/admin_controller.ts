@@ -113,13 +113,13 @@ export const productDeleteControl=async(req:Request,res:Response)=>{
 
 
 export const userAdd=async(req:Request,res:Response)=>{
-  const {branch_id, name,email, password, role}=req.body
+  const {branch_id, name,email, password, role, category }=req.body
 
-  if(!branch_id || !name || !email || !password || !role){
+  if(!branch_id || !name || !email || !password || !role ){
     return res.status(400).json({message:"required field is missing"})
   }
 
-  const result= await employeeService(branch_id, name,email, password, role);
+  const result= await employeeService(branch_id, name,email, password, role, category);
   if(!result){
     return res.status(400).json({message:'failed to add employee'})
   }

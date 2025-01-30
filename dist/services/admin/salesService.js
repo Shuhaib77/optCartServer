@@ -13,7 +13,7 @@ exports.salesGetService = void 0;
 const database_1 = require("../../config/database");
 const Sales_1 = require("../../entities/Sales");
 const salesGetService = (branchId, startDate, endDate) => __awaiter(void 0, void 0, void 0, function* () {
-    const salesRepo = database_1.AppDataSource.getRepository(Sales_1.SalesReports);
+    const salesRepo = database_1.AppDataSource.getRepository(Sales_1.Sales);
     const query = salesRepo.createQueryBuilder('salesReports')
         .leftJoinAndSelect("salesReports.branch", "branch")
         .leftJoinAndSelect("salesReports.product", "product");

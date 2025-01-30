@@ -14,12 +14,13 @@ const typeorm_1 = require("typeorm");
 require("reflect-metadata");
 const Leave_1 = require("./Leave");
 const Branches_1 = require("./Branches");
+const Sales_1 = require("./Sales");
 let User = class User {
 };
 exports.User = User;
 __decorate([
     (0, typeorm_1.PrimaryGeneratedColumn)('uuid'),
-    __metadata("design:type", Number)
+    __metadata("design:type", Object)
 ], User.prototype, "id", void 0);
 __decorate([
     (0, typeorm_1.ManyToOne)(() => Branches_1.Branches, (branch) => branch.users, { onDelete: "CASCADE" }) // Define the relationship with Tenant.
@@ -49,6 +50,14 @@ __decorate([
     __metadata("design:type", String)
 ], User.prototype, "role", void 0);
 __decorate([
+    (0, typeorm_1.Column)({
+        type: 'enum',
+        enum: ["sales", "inventory", "Finance", "customer_service"],
+        nullable: true
+    }),
+    __metadata("design:type", String)
+], User.prototype, "category", void 0);
+__decorate([
     (0, typeorm_1.CreateDateColumn)({ type: "timestamp", default: () => "CURRENT_TIMESTAMP" }),
     __metadata("design:type", Date)
 ], User.prototype, "created_at", void 0);
@@ -60,6 +69,11 @@ __decorate([
     (0, typeorm_1.OneToMany)(() => Leave_1.Leave, (leave) => leave.user),
     __metadata("design:type", Array)
 ], User.prototype, "leaves", void 0);
+__decorate([
+    (0, typeorm_1.OneToMany)(() => Sales_1.Sales, (sales) => sales.staff) // Link Sales to User
+    ,
+    __metadata("design:type", Array)
+], User.prototype, "sales", void 0);
 exports.User = User = __decorate([
     (0, typeorm_1.Entity)()
 ], User);

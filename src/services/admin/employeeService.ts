@@ -3,35 +3,51 @@ import { AppDataSource } from "../../config/database"
 import { Branches } from "../../entities/Branches"
 import { User } from "../../entities/user_entity"
 
-export const employeeService=async(
-    branch_id:string, name:string,email:string, password:string, role:"admin"|"hr_manager"| "staff_head"| "staff"
-   )=>{
-    const branchRepo=AppDataSource.getRepository(Branches)
-    const userRepo=AppDataSource.getRepository(User)
-
-    const branch=await branchRepo.findOneBy({id:branch_id})
-
-    if(!branch){
-        throw new Error("branch not found")
+export const employeeService = async (
+    branch_id: string, 
+    name: string, 
+    email: string, 
+    password: string, 
+    role: "admin" | "hr_manager" | "staff_head" | "staff", 
+    category?: "sales" | "inventory" | "Finance" | "customer_service"
+  ) => {
+    const branchRepo = AppDataSource.getRepository(Branches);
+    const userRepo = AppDataSource.getRepository(User);
+  
+    const branch = await branchRepo.findOneBy({ id: branch_id });
+  
+    if (!branch) {
+      throw new Error("Branch not found");
     }
-
-    const data=await userRepo.findOneBy({email:email})
-    if(data){
-        throw new Error ('user already exist')
+  
+    const existingUser = await userRepo.findOneBy({ email: email });
+    if (existingUser) {
+      throw new Error("User already exists");
     }
-
-    const newUser=userRepo.create({
-        branch:branch,
-        name,
-        email,
-        password,
-        role:role
-    })
-
-    await userRepo.save(newUser)
-
-    return newUser
-}
+  
+    // Validate category based on role
+    if (role === "staff_head" && !category) {
+      throw new Error("Category is required for staff_head role");
+    }
+  
+    if (role !== "staff_head" && category) {
+      throw new Error("Only staff_head role can have a category");
+    }
+  
+    const newUser = userRepo.create({
+      branch: branch,
+      name,
+      email,
+      password,
+      role,
+      category: role === "staff_head" ? category : undefined // Ensure other roles do not store category
+    });
+  
+    await userRepo.save(newUser);
+  
+    return newUser;
+  };
+  
 
 
 export const employeeUpdateService=async(
