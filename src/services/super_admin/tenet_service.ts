@@ -20,7 +20,8 @@ export const tenent_create = async (
   const new_tenant=tenantRepo.create({
     name:name,
     password:password,
-    created_by:"super_admin"
+    created_by:name
+
 
   })  
   await tenantRepo.save(new_tenant)

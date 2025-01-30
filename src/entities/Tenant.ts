@@ -31,7 +31,7 @@ export class Tenant {
   is_deleted!: boolean; // Use `boolean` instead of string for boolean-like values.
 
 
-  @Column({ type: "varchar", length: 200 })
+  @Column({ type: "varchar", length: 200, })
   created_by!: string;
 
   
