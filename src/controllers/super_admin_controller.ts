@@ -7,6 +7,7 @@ export const create_tenant = async (req: Request, res: Response) => {
     return res.status(400).json({ message: "all field are nessessory" });
   }
   const data = await tenent_create(name, password);
+  
   if (!data) {
     return res.status(404).json({ message: "login failed" });
   }

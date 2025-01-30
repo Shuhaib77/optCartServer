@@ -12,7 +12,7 @@ export const tenent_create = async (
   const tenantRepo = AppDataSource.getRepository(Tenant);
 
   const data = await tenantRepo.findOneBy({
-    domain: name,
+    name: name,
   } as FindOptionsWhere<Tenant>);
   if(data){
     throw new Error("tenent alredy exist")
@@ -20,8 +20,10 @@ export const tenent_create = async (
   const new_tenant=tenantRepo.create({
     name:name,
     password:password,
+    created_by:name
 
   })  
+  await tenantRepo.save(new_tenant)
   return new_tenant
 
 };
