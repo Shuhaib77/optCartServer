@@ -38,7 +38,7 @@ export const getBranch=async()=>{
         throw new Error("branches not found")
     }
     return branches
-}
+}  
 
 export const updateBranch=async(
     branchId:string, branch_name:string,location:string
