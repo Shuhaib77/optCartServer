@@ -12,10 +12,10 @@ export class inventoryAudit{
     audit_date!:Date
     @Column({type:"jsonb"})
     Discrepancies!:string
-    @ManyToOne(()=>Product,(product)=>product.inventory_audits)
-    product!:Product
-    @ManyToOne(()=>Branches,(branches)=>branches.inventory_audits)
-    branch!:Branches
+    // @ManyToOne(()=>Product,(product)=>product.inventoryAudits)
+    // product!:Product
+    // @ManyToOne(()=>Branches,(branches)=>branches.inventory_audits)
+    // branch!:Branches
     
 
 }

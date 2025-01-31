@@ -16,28 +16,28 @@ let Policies = class Policies {
 };
 exports.Policies = Policies;
 __decorate([
-    (0, typeorm_1.PrimaryGeneratedColumn)('uuid'),
+    (0, typeorm_1.PrimaryGeneratedColumn)("uuid"),
     __metadata("design:type", String)
 ], Policies.prototype, "id", void 0);
 __decorate([
-    (0, typeorm_1.Column)({ type: 'varchar' }),
+    (0, typeorm_1.Column)({ type: "varchar" }),
     __metadata("design:type", String)
 ], Policies.prototype, "name", void 0);
 __decorate([
-    (0, typeorm_1.Column)({ type: 'varchar' }),
+    (0, typeorm_1.Column)({ type: "varchar" }),
     __metadata("design:type", String)
 ], Policies.prototype, "description", void 0);
 __decorate([
-    (0, typeorm_1.CreateDateColumn)({ type: 'timestamp' }),
+    (0, typeorm_1.CreateDateColumn)({ type: "timestamp" }),
     __metadata("design:type", Date)
 ], Policies.prototype, "created_at", void 0);
 __decorate([
-    (0, typeorm_1.UpdateDateColumn)({ type: 'timestamp' }),
+    (0, typeorm_1.UpdateDateColumn)({ type: "timestamp" }),
     __metadata("design:type", Date)
 ], Policies.prototype, "updated_at", void 0);
 __decorate([
     (0, typeorm_1.ManyToOne)(() => Tenant_1.Tenant, (tenent) => tenent.Policies, { onDelete: "CASCADE" }),
-    (0, typeorm_1.JoinColumn)({ name: 'tenant_id' }),
+    (0, typeorm_1.JoinColumn)({ name: "tenant_id" }),
     __metadata("design:type", Tenant_1.Tenant)
 ], Policies.prototype, "tenant", void 0);
 exports.Policies = Policies = __decorate([

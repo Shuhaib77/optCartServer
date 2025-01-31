@@ -1,6 +1,7 @@
 import { Entity, PrimaryGeneratedColumn, Column, CreateDateColumn, UpdateDateColumn, ManyToMany, ManyToOne, JoinColumn, OneToMany } from "typeorm"
 import { Branches } from "./Branches";
 import { Sales } from './Sales';
+import { inventoryAudit } from "./InventoryAudits";
 
 
 @Entity()
@@ -35,5 +36,9 @@ export class Product {
 
     @OneToMany(()=>Sales,(sales)=>sales.products)
     Sales!:Sales[];
+    // @OneToMany(() => inventoryAudit, (audit) => audit.product)
+    // inventoryAudits!: inventoryAudit[]
+
+
 
 }

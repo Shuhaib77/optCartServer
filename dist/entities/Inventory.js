@@ -11,7 +11,6 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.inventory = void 0;
 const typeorm_1 = require("typeorm");
-const Branches_1 = require("./Branches");
 let inventory = class inventory {
 };
 exports.inventory = inventory;
@@ -45,12 +44,11 @@ __decorate([
 ], inventory.prototype, "created_at", void 0);
 __decorate([
     (0, typeorm_1.UpdateDateColumn)({ type: "timestamp" }),
-    __metadata("design:type", Date)
+    __metadata("design:type", Date
+    // @OneToMany(()=>Branches,(Branches)=>Branches.inventory)
+    // branches!:[]
+    )
 ], inventory.prototype, "updated_at", void 0);
-__decorate([
-    (0, typeorm_1.OneToMany)(() => Branches_1.Branches, (Branches) => Branches.inventory),
-    __metadata("design:type", Array)
-], inventory.prototype, "branches", void 0);
 exports.inventory = inventory = __decorate([
     (0, typeorm_1.Entity)()
 ], inventory);

@@ -15,6 +15,8 @@ import { Leave } from "./Leave";
 import { User } from "./user_entity";
 import { jobOpenings } from "./jobOpenings";
 import { Sales } from "./Sales";
+import { inventory } from "./Inventory";
+import { inventoryAudit } from "./InventoryAudits";
 
 
 @Entity()
@@ -54,8 +56,8 @@ export class Branches {
   @OneToMany(() => jobOpenings, (jobOpenings) => jobOpenings.branch)
   job_Openings!: jobOpenings[];
 
-  @ManyToOne(() => inventory, (inventory) => inventory.branches)
-  inventory!: inventory;
-  @OneToMany(()=>inventoryAudit,(inventoryAudit)=>inventoryAudit.branch)
-  inventory_audits!: inventoryAudit[]
+  // @ManyToOne(() => inventory, (inventory) => inventory.branches)
+  // inventory!: inventory;
+  // @OneToMany(()=>inventoryAudit,(inventoryAudit)=>inventoryAudit)
+  // inventory_audits!: inventoryAudit[]
 }

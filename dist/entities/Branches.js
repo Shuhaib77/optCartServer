@@ -17,7 +17,6 @@ const Leave_1 = require("./Leave");
 const user_entity_1 = require("./user_entity");
 const jobOpenings_1 = require("./jobOpenings");
 const Sales_1 = require("./Sales");
-
 let Branches = class Branches {
 };
 exports.Branches = Branches;
@@ -67,14 +66,6 @@ __decorate([
     (0, typeorm_1.OneToMany)(() => jobOpenings_1.jobOpenings, (jobOpenings) => jobOpenings.branch),
     __metadata("design:type", Array)
 ], Branches.prototype, "job_Openings", void 0);
-__decorate([
-    (0, typeorm_1.ManyToOne)(() => Inventory_1.inventory, (inventory) => inventory.branches),
-    __metadata("design:type", Inventory_1.inventory)
-], Branches.prototype, "inventory", void 0);
-__decorate([
-    (0, typeorm_1.OneToMany)(() => InventoryAudits_1.inventoryAudit, (inventoryAudit) => inventoryAudit.branch),
-    __metadata("design:type", Array)
-], Branches.prototype, "inventory_audits", void 0);
 exports.Branches = Branches = __decorate([
     (0, typeorm_1.Entity)()
 ], Branches);

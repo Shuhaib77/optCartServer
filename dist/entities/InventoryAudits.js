@@ -11,8 +11,6 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.inventoryAudit = void 0;
 const typeorm_1 = require("typeorm");
-const Product_1 = require("./Product");
-const Branches_1 = require("./Branches");
 let inventoryAudit = class inventoryAudit {
 };
 exports.inventoryAudit = inventoryAudit;
@@ -28,14 +26,6 @@ __decorate([
     (0, typeorm_1.Column)({ type: "jsonb" }),
     __metadata("design:type", String)
 ], inventoryAudit.prototype, "Discrepancies", void 0);
-__decorate([
-    (0, typeorm_1.ManyToOne)(() => Product_1.Product, (product) => product.inventory_audits),
-    __metadata("design:type", Product_1.Product)
-], inventoryAudit.prototype, "product", void 0);
-__decorate([
-    (0, typeorm_1.ManyToOne)(() => Branches_1.Branches, (branches) => branches.inventory_audits),
-    __metadata("design:type", Branches_1.Branches)
-], inventoryAudit.prototype, "branch", void 0);
 exports.inventoryAudit = inventoryAudit = __decorate([
     (0, typeorm_1.Entity)()
 ], inventoryAudit);

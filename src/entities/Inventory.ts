@@ -24,8 +24,8 @@ export class inventory{
     created_at!: Date
     @UpdateDateColumn({type:"timestamp"})
     updated_at!: Date
-    @OneToMany(()=>Branches,(Branches)=>Branches.inventory)
-    branches!:[]
+    // @OneToMany(()=>Branches,(Branches)=>Branches.inventory)
+    // branches!:[]
     
 
      
