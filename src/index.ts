@@ -1,6 +1,6 @@
 import { AppDataSource } from "./config/database";
 import app from './app';
-AppDataSource.initialize()
+   AppDataSource.initialize()
   .then(() => {
     console.log("Database connection established");
 

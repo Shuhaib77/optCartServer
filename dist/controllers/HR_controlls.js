@@ -9,8 +9,9 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
     });
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.jobOpeningsDelete = exports.getJobOpeningsById = exports.getJobOpenings = exports.updateJobOpenings = exports.create_jobOpenings = void 0;
+exports.getAttendanceByUserId = exports.getAttendance = exports.updateAttendance = exports.addAttendance = exports.jobOpeningsDelete = exports.getJobOpeningsById = exports.getJobOpenings = exports.updateJobOpenings = exports.create_jobOpenings = void 0;
 const jobOpenings_1 = require("../services/hr/jobOpenings");
+const attendance_service_1 = require("../services/hr/attendance_service");
 const create_jobOpenings = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     const { branchId, job_title, description, requirements, location, salary_range, closed_at } = req.body;
     if (!branchId || !job_title || !description || !requirements || !location || !salary_range) {
@@ -59,3 +60,44 @@ const jobOpeningsDelete = (req, res) => __awaiter(void 0, void 0, void 0, functi
     res.status(201).json(result);
 });
 exports.jobOpeningsDelete = jobOpeningsDelete;
+//attendance
+const addAttendance = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
+    const { userId } = req.params;
+    const { status } = req.body;
+    if (!userId || !status) {
+        return res.status(400).json({ message: 'required field is missing' });
+    }
+    const result = yield (0, attendance_service_1.addAttendanceService)(userId, status);
+    if (!result) {
+        return res.status(400).json({ message: "failed to add attendance" });
+    }
+    res.status(201).json({ data: result, message: 'attendance added successfully' });
+});
+exports.addAttendance = addAttendance;
+const updateAttendance = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
+    const { userId } = req.params;
+    const { status, date } = req.body;
+    const result = yield (0, attendance_service_1.updateAttendanceService)(userId, status, date);
+    if (!result) {
+        return res.status(400).json({ message: "failed to update attendance" });
+    }
+    res.status(201).json({ data: result, message: 'attendance updated successfully' });
+});
+exports.updateAttendance = updateAttendance;
+const getAttendance = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
+    const result = yield (0, attendance_service_1.getAttendanceService)();
+    if (!result) {
+        return res.status(400).json({ message: "failed to fetch attendance" });
+    }
+    res.status(201).json({ data: result, message: 'attendance fetched successfully' });
+});
+exports.getAttendance = getAttendance;
+const getAttendanceByUserId = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
+    const { userId } = req.params;
+    const result = yield (0, attendance_service_1.getAttendanceServiceByUserId)(userId);
+    if (!result) {
+        return res.status(400).json({ message: "failed to fetch attendance" });
+    }
+    res.status(201).json({ data: result, message: 'attendance fetched successfully' });
+});
+exports.getAttendanceByUserId = getAttendanceByUserId;
