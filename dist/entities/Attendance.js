@@ -11,13 +11,34 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.Attendance = void 0;
 const typeorm_1 = require("typeorm");
+const user_entity_1 = require("./user_entity");
 let Attendance = class Attendance {
 };
 exports.Attendance = Attendance;
 __decorate([
-    (0, typeorm_1.PrimaryGeneratedColumn)(),
+    (0, typeorm_1.PrimaryGeneratedColumn)("uuid"),
     __metadata("design:type", String)
 ], Attendance.prototype, "id", void 0);
+__decorate([
+    (0, typeorm_1.ManyToOne)(() => user_entity_1.User, (user) => user.attendance),
+    __metadata("design:type", user_entity_1.User)
+], Attendance.prototype, "user", void 0);
+__decorate([
+    (0, typeorm_1.Column)({ type: 'enum',
+        enum: ["present", "excused", "unexcused", "late", "no status"],
+        nullable: false,
+        default: "no status"
+    }),
+    __metadata("design:type", String)
+], Attendance.prototype, "status", void 0);
+__decorate([
+    (0, typeorm_1.CreateDateColumn)({ type: 'timestamp' }),
+    __metadata("design:type", Date)
+], Attendance.prototype, "date", void 0);
+__decorate([
+    (0, typeorm_1.UpdateDateColumn)({ type: "timestamp" }),
+    __metadata("design:type", Date)
+], Attendance.prototype, "updated_at", void 0);
 exports.Attendance = Attendance = __decorate([
     (0, typeorm_1.Entity)()
 ], Attendance);

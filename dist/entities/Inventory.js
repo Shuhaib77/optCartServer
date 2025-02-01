@@ -15,7 +15,7 @@ let inventory = class inventory {
 };
 exports.inventory = inventory;
 __decorate([
-    (0, typeorm_1.PrimaryGeneratedColumn)('uuid'),
+    (0, typeorm_1.PrimaryGeneratedColumn)("uuid"),
     __metadata("design:type", String)
 ], inventory.prototype, "id", void 0);
 __decorate([
@@ -44,10 +44,7 @@ __decorate([
 ], inventory.prototype, "created_at", void 0);
 __decorate([
     (0, typeorm_1.UpdateDateColumn)({ type: "timestamp" }),
-    __metadata("design:type", Date
-    // @OneToMany(()=>Branches,(Branches)=>Branches.inventory)
-    // branches!:[]
-    )
+    __metadata("design:type", Date)
 ], inventory.prototype, "updated_at", void 0);
 exports.inventory = inventory = __decorate([
     (0, typeorm_1.Entity)()

@@ -4,6 +4,7 @@ import { Tenant } from "./Tenant";
 import { Leave } from "./Leave";
 import { Branches } from "./Branches";
 import { Sales } from "./Sales";
+import { Attendance } from "./Attendance";
 
 
 
@@ -55,6 +56,11 @@ export class User {
 
     @OneToMany(() => Sales, (sales) => sales.staff) // Link Sales to User
     sales!: Sales[];
+    
+
+    @OneToMany(() => Attendance, (attendance) => attendance.user) // Link Sales to User
+    attendance!: Attendance[];
+  
 
 
 
