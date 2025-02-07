@@ -1,6 +1,7 @@
 import { Request, Response } from "express";
 import {deleteJobOpeningsService, getJobOpeningsByIdService, getJobOpeningService, jobOpenings_service, jobOpeningUpdateService} from '../services/hr/jobOpenings';
 import { addAttendanceService, getAttendanceService, getAttendanceServiceByUserId, updateAttendanceService } from "../services/hr/attendance_service";
+import { getLeaveRequestByIdService, getLeaveRequestService, updateLeaveRequestService } from "../services/hr/leave_service";
 
 export const create_jobOpenings = async (req:Request,res:Response) =>{
     const {branchId,job_title,description,requirements, location, salary_range,closed_at}=req.body
@@ -143,6 +144,59 @@ export const getAttendanceByUserId=async(req:Request,res:Response)=>{
 
   res.status(201).json({data:result,message:'attendance fetched successfully'})
 }
+
+
+
+//leave request-----
+
+export const updateLeaveRequest=async(req:Request,res:Response)=>{
+  const {name,reason,start_Date,end_Date,status}=req.body;
+  const {leaveId}=req.params;
+
+
+  const result= await updateLeaveRequestService(name,reason,start_Date,end_Date,status,leaveId)
+  if(!result){
+    return res.status(400).json({message:'error to update leave request'})
+  }
+
+
+  res.status(201).json({message:'updated success fully',data:result})
+
+
+}
+
+
+export const getLeaveRequest=async(req:Request,res:Response)=>{
+
+
+  const result=await getLeaveRequestService()
+  if(!result){
+    return res.status(400).json({message:'error to fetch leaveRequest'})
+  }
+
+
+  res.status(200).json({data:result,message:'leaveRequest fetched success fully'})
+
+
+}
+
+
+
+export const getLeaveRequestById=async(req:Request,res:Response)=>{
+  const {leaveId}=req.params;
+  
+  
+    const result=await getLeaveRequestByIdService(leaveId)
+    if(!result){
+      return res.status(400).json({message:'error to fetch leaveRequest'})
+    }
+  
+  
+    res.status(200).json({data:result,message:'leaveRequest fetched success fully'})
+  
+  
+  }
+  
 
 
 

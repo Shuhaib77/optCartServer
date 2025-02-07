@@ -32,3 +32,32 @@ export const updateLeaveRequestService= async(
 
 
 }
+
+
+export const getLeaveRequestService=async()=>{
+  const leaveRepo=AppDataSource.getRepository(Leave)
+ 
+ 
+  const leave=await leaveRepo.find()
+  if(!leave){
+     throw new Error("some error to fetch the leaveRequests")
+  }
+ 
+ 
+  return leave
+ }
+
+
+
+ export const getLeaveRequestByIdService=async(leaveId:string)=>{
+  const leaveRepo=AppDataSource.getRepository(Leave)
+ 
+  const leave=await leaveRepo.findOneBy({id:leaveId})
+  if(!leave){
+     throw new Error("some error to fetch the leaveRequests")
+  }
+ 
+  return leave
+ }
+
+ 
