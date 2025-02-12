@@ -1,9 +1,13 @@
-import { Column, CreateDateColumn, Entity, PrimaryGeneratedColumn, UpdateDateColumn } from "typeorm";
+import { Column, CreateDateColumn, Entity, ManyToOne, PrimaryGeneratedColumn, UpdateDateColumn } from "typeorm";
+import { User } from './user_entity';
 
 @Entity()
 export class payroll{
     @PrimaryGeneratedColumn('uuid')
     id!:string;
+
+    @ManyToOne(()=>User,(user)=>user.payroll,{onDelete:"CASCADE"})
+    employee_id!:User;
 
     @Column({type:'decimal'})
     salary_amount!:number;
