@@ -17,6 +17,8 @@ const Inventory_1 = require("../entities/Inventory");
 const InventoryAudits_1 = require("../entities/InventoryAudits");
 const Policies_1 = require("../entities/Policies");
 const Attendance_1 = require("../entities/Attendance");
+const payroll_1 = require("../entities/payroll");
+const Complaints_1 = require("../entities/Complaints");
 dotenv_1.default.config();
 exports.AppDataSource = new typeorm_1.DataSource({
     type: "postgres",
@@ -29,7 +31,7 @@ exports.AppDataSource = new typeorm_1.DataSource({
     },
     synchronize: false,
     logging: true,
-    entities: [Product_1.Product, Tenant_1.Tenant, user_entity_1.User, Leave_1.Leave, Branches_1.Branches, Policies_1.Policies, Sales_1.Sales, jobOpenings_1.jobOpenings, Inventory_1.inventory, InventoryAudits_1.inventoryAudit, Attendance_1.Attendance],
+    entities: [Product_1.Product, Tenant_1.Tenant, user_entity_1.User, Leave_1.Leave, Branches_1.Branches, Policies_1.Policies, Sales_1.Sales, jobOpenings_1.jobOpenings, Inventory_1.inventory, InventoryAudits_1.inventoryAudit, Attendance_1.Attendance, payroll_1.payroll, Complaints_1.complaints],
     migrations: ["dist/migrations/*.js"],
     subscribers: []
 });
