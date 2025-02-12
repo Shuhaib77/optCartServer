@@ -5,6 +5,7 @@ import { Leave } from "./Leave";
 import { Branches } from "./Branches";
 import { Sales } from "./Sales";
 import { Attendance } from "./Attendance";
+import { payroll } from './payroll';
 
 
 
@@ -60,6 +61,9 @@ export class User {
 
     @OneToMany(() => Attendance, (attendance) => attendance.user) // Link Sales to User
     attendance!: Attendance[];
+
+    @OneToMany(()=>payroll,(payroll)=>payroll.employee_id)
+    payroll!:payroll[];
   
 
 
