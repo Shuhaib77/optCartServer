@@ -14,6 +14,7 @@ import { Attendance } from "../entities/Attendance"
 import { payroll } from "../entities/payroll"
 import { complaints } from "../entities/Complaints"
 
+
 dotenv.config()
 
 export const AppDataSource = new DataSource({
@@ -27,6 +28,8 @@ export const AppDataSource = new DataSource({
     },
     synchronize: false,
     logging: true,
+
+
     entities: [Product,Tenant,User,Leave,Branches,Policies,Sales,jobOpenings,inventory,inventoryAudit,Attendance,payroll,complaints],
 
     migrations: ["dist/migrations/*.js"],
