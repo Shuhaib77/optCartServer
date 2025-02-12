@@ -9,7 +9,7 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
     });
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.updateLeaveRequestService = void 0;
+exports.getLeaveRequestByIdService = exports.getLeaveRequestService = exports.updateLeaveRequestService = void 0;
 const database_1 = require("../../config/database");
 const Leave_1 = require("../../entities/Leave");
 const updateLeaveRequestService = (name, reason, start_Date, end_Date, status, leaveRequestId) => __awaiter(void 0, void 0, void 0, function* () {
@@ -28,3 +28,21 @@ const updateLeaveRequestService = (name, reason, start_Date, end_Date, status, l
     return updatedLeave;
 });
 exports.updateLeaveRequestService = updateLeaveRequestService;
+const getLeaveRequestService = () => __awaiter(void 0, void 0, void 0, function* () {
+    const leaveRepo = database_1.AppDataSource.getRepository(Leave_1.Leave);
+    const leave = yield leaveRepo.find();
+    if (!leave) {
+        throw new Error("some error to fetch the leaveRequests");
+    }
+    return leave;
+});
+exports.getLeaveRequestService = getLeaveRequestService;
+const getLeaveRequestByIdService = (leaveId) => __awaiter(void 0, void 0, void 0, function* () {
+    const leaveRepo = database_1.AppDataSource.getRepository(Leave_1.Leave);
+    const leave = yield leaveRepo.findOneBy({ id: leaveId });
+    if (!leave) {
+        throw new Error("some error to fetch the leaveRequests");
+    }
+    return leave;
+});
+exports.getLeaveRequestByIdService = getLeaveRequestByIdService;
