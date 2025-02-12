@@ -16,6 +16,7 @@ const Leave_1 = require("./Leave");
 const Branches_1 = require("./Branches");
 const Sales_1 = require("./Sales");
 const Attendance_1 = require("./Attendance");
+const payroll_1 = require("./payroll");
 let User = class User {
 };
 exports.User = User;
@@ -80,6 +81,10 @@ __decorate([
     ,
     __metadata("design:type", Array)
 ], User.prototype, "attendance", void 0);
+__decorate([
+    (0, typeorm_1.OneToMany)(() => payroll_1.payroll, (payroll) => payroll.employee_id),
+    __metadata("design:type", Array)
+], User.prototype, "payroll", void 0);
 exports.User = User = __decorate([
     (0, typeorm_1.Entity)()
 ], User);
