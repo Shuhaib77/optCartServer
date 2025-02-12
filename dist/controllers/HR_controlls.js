@@ -9,9 +9,10 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
     });
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.getAttendanceByUserId = exports.getAttendance = exports.updateAttendance = exports.addAttendance = exports.jobOpeningsDelete = exports.getJobOpeningsById = exports.getJobOpenings = exports.updateJobOpenings = exports.create_jobOpenings = void 0;
+exports.getLeaveRequestById = exports.getLeaveRequest = exports.updateLeaveRequest = exports.getAttendanceByUserId = exports.getAttendance = exports.updateAttendance = exports.addAttendance = exports.jobOpeningsDelete = exports.getJobOpeningsById = exports.getJobOpenings = exports.updateJobOpenings = exports.create_jobOpenings = void 0;
 const jobOpenings_1 = require("../services/hr/jobOpenings");
 const attendance_service_1 = require("../services/hr/attendance_service");
+const leave_service_1 = require("../services/hr/leave_service");
 const create_jobOpenings = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     const { branchId, job_title, description, requirements, location, salary_range, closed_at } = req.body;
     if (!branchId || !job_title || !description || !requirements || !location || !salary_range) {
@@ -101,3 +102,31 @@ const getAttendanceByUserId = (req, res) => __awaiter(void 0, void 0, void 0, fu
     res.status(201).json({ data: result, message: 'attendance fetched successfully' });
 });
 exports.getAttendanceByUserId = getAttendanceByUserId;
+//leave request-----
+const updateLeaveRequest = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
+    const { name, reason, start_Date, end_Date, status } = req.body;
+    const { leaveId } = req.params;
+    const result = yield (0, leave_service_1.updateLeaveRequestService)(name, reason, start_Date, end_Date, status, leaveId);
+    if (!result) {
+        return res.status(400).json({ message: 'error to update leave request' });
+    }
+    res.status(201).json({ message: 'updated success fully', data: result });
+});
+exports.updateLeaveRequest = updateLeaveRequest;
+const getLeaveRequest = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
+    const result = yield (0, leave_service_1.getLeaveRequestService)();
+    if (!result) {
+        return res.status(400).json({ message: 'error to fetch leaveRequest' });
+    }
+    res.status(200).json({ data: result, message: 'leaveRequest fetched success fully' });
+});
+exports.getLeaveRequest = getLeaveRequest;
+const getLeaveRequestById = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
+    const { leaveId } = req.params;
+    const result = yield (0, leave_service_1.getLeaveRequestByIdService)(leaveId);
+    if (!result) {
+        return res.status(400).json({ message: 'error to fetch leaveRequest' });
+    }
+    res.status(200).json({ data: result, message: 'leaveRequest fetched success fully' });
+});
+exports.getLeaveRequestById = getLeaveRequestById;
