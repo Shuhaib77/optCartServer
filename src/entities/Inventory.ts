@@ -2,6 +2,7 @@ import {
   Column,
   CreateDateColumn,
   Entity,
+  ManyToOne,
   OneToMany,
   PrimaryGeneratedColumn,
   UpdateDateColumn,
@@ -26,6 +27,6 @@ export class inventory {
   created_at!: Date;
   @UpdateDateColumn({ type: "timestamp" })
   updated_at!: Date;
-  // @OneToMany(()=>Branches,(Branches)=>Branches.inventory)
-  // branches!:[]
+  @ManyToOne(()=>Branches,(branches)=>branches.inventory)
+  branches!:Branches
 }
