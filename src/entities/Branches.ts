@@ -55,5 +55,7 @@ export class Branches {
   job_Openings!: jobOpenings[];
   @OneToMany(()=>complaints,(complaints)=>complaints.branches)
   complaints!:complaints[]
+  @OneToMany(()=>inventory,(inventorys)=>inventorys.branches)
+  inventory!:inventory[]
 
 }
